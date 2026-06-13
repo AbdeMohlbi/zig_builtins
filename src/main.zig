@@ -6,13 +6,7 @@ const print = std.debug.print;
 const mem = @import("std").mem;
 const zig_builtins = @import("zig_builtins");
 
-pub fn main() !void {
-    const var_4 = 255;
-    // try expectEqual(@as(u4, var_4), 255);
-    const var_5 = @as(u4, var_4);
-    print("{}\n", .{var_4});
-    print("{}\n", .{var_5});
-}
+pub fn main() !void {}
 
 test "@addWithOverflow tests" {
     // addition that does not cause an overflow
@@ -73,4 +67,19 @@ test "@as tests" {
 
     const var_3 = @as(u8, var_2);
     try expectEqual(var_3, 255);
+}
+
+test "@select tests" {
+    // Selects values element-wise from a or b based on pred. If pred[i] is true,
+    // the corresponding element in the result will be a[i] and otherwise b[i].
+    const Vec8i32 = @Vector(8, i32);
+
+    const a: Vec8i32 = .{ 10, 20, 30, 40, 50, 60, 70, 80 };
+    const b: Vec8i32 = .{ 1, 2, 3, 4, 5, 6, 7, 8 };
+
+    const mask: @Vector(8, bool) = .{ true, false, true, false, true, false, true, false };
+
+    const result = @select(i32, mask, a, b);
+    std.debug.print("Result: {any}\n", .{result});
+    try expectEqual(result, .{ 10, 2, 30, 4, 50, 6, 70, 8 });
 }
