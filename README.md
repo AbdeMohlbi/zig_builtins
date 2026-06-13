@@ -6,3 +6,4 @@ at the moment those are the builtin that this repo contains / have tests for
 - [x] @addWithOverflow
 - [x] @subWithOverflow
 - [x] @mulWithOverflow
+- [x] @as

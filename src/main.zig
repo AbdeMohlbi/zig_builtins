@@ -6,7 +6,13 @@ const print = std.debug.print;
 const mem = @import("std").mem;
 const zig_builtins = @import("zig_builtins");
 
-pub fn main() !void {}
+pub fn main() !void {
+    const var_4 = 255;
+    // try expectEqual(@as(u4, var_4), 255);
+    const var_5 = @as(u4, var_4);
+    print("{}\n", .{var_4});
+    print("{}\n", .{var_5});
+}
 
 test "@addWithOverflow tests" {
     // addition that does not cause an overflow
@@ -53,4 +59,18 @@ test "@mulWithOverflow tests" {
     const var_3: u8 = 20;
     const var_4: u8 = 20;
     try expectEqual(@mulWithOverflow(var_3, var_4), .{ 144, 1 });
+}
+
+test "@as tests" {
+    // Performs Type Coercion. This cast is allowed when the conversion is unambiguous and safe,
+    // and is the preferred way to convert between types, whenever possible.
+    const var_1 = 255;
+    // the value of the second operand should be a subtype of the type given in the first operand
+    try expectEqual(@as(u32, var_1), 255);
+
+    const var_2 = @as(u16, var_1);
+    try expectEqual(var_2, 255);
+
+    const var_3 = @as(u8, var_2);
+    try expectEqual(var_3, 255);
 }
