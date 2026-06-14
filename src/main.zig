@@ -80,6 +80,29 @@ test "@select tests" {
     const mask: @Vector(8, bool) = .{ true, false, true, false, true, false, true, false };
 
     const result = @select(i32, mask, a, b);
-    std.debug.print("Result: {any}\n", .{result});
     try expectEqual(result, .{ 10, 2, 30, 4, 50, 6, 70, 8 });
+}
+
+test "@sizeOf tests" {
+    inline for (.{ i1, i2, i3, i4, i5, i6, i7, i8 }) |Type| {
+        try expectEqual(@sizeOf(Type), 1);
+    }
+
+    inline for (.{ i9, i10, i11, i12, i13, i14, i15, i16 }) |Type| {
+        try expectEqual(@sizeOf(Type), 2);
+    }
+    inline for (.{ u1, u2, u3, u4, u5, u6, u7, u8 }) |Type| {
+        try expectEqual(@sizeOf(Type), 1);
+    }
+
+    inline for (.{ u9, u10, u11, u12, u13, u14, u15, u16 }) |Type| {
+        try expectEqual(@sizeOf(Type), 2);
+    }
+
+    inline for (.{ i17, u17 }) |Type| {
+        try expectEqual(@sizeOf(Type), 4);
+    }
+    inline for (.{ i33, u33 }) |Type| {
+        try expectEqual(@sizeOf(Type), 8);
+    }
 }
