@@ -124,3 +124,18 @@ test "@truncate tests" {
 
     try expectEqual(truncated_2, 0x1);
 }
+
+test "@bitSizeOf tests" {
+    // returns the bit size of a type
+    const type_1 = @bitSizeOf(u32);
+    try expectEqual(type_1, 32);
+
+    const type_2 = @bitSizeOf(u31);
+    try expectEqual(type_2, 31);
+
+    const type_3 = @bitSizeOf(i32);
+    try expectEqual(type_3, 32);
+
+    const type_4 = @bitSizeOf(i31);
+    try expectEqual(type_4, 31);
+}
