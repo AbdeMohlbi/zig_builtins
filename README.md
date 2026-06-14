@@ -9,3 +9,4 @@ at the moment those are the builtin that this repo contains / have tests for
 - [x] @as
 - [x] @select
 - [x] @sizeOf
+- [x] @truncate

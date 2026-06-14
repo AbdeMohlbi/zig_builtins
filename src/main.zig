@@ -106,3 +106,21 @@ test "@sizeOf tests" {
         try expectEqual(@sizeOf(Type), 8);
     }
 }
+
+test "@truncate tests" {
+    // truncates a type into another type and requires inferring the destination type
+    const original: u16 = 0xABCD;
+    // 1 0 1 0 1 0 1 1 1 1 0 0 1 1 0 1
+
+    const truncated: u8 = @truncate(original);
+
+    try expectEqual(truncated, 0xCD);
+
+    const truncated_1: u4 = @truncate(original);
+
+    try expectEqual(truncated_1, 0xD);
+
+    const truncated_2: u2 = @truncate(original);
+
+    try expectEqual(truncated_2, 0x1);
+}
