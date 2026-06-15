@@ -6,7 +6,11 @@ const print = std.debug.print;
 const mem = @import("std").mem;
 const zig_builtins = @import("zig_builtins");
 
-pub fn main() !void {}
+pub fn main() !void {
+    const a: u16 = 0b1010101111001101;
+    const b = @popCount(a);
+    print("{}\n", .{b});
+}
 
 test "@addWithOverflow tests" {
     // addition that does not cause an overflow
@@ -141,8 +145,16 @@ test "@bitSizeOf tests" {
 }
 
 test "@intCast tests" {
-    // converts an int to another int and could
+    // converts an int to another int and could fail and cause IB (Illegal Behavior).
     const a: u16 = 0b0000000011111111;
     const b: u8 = @intCast(a);
     try expectEqual(b, 255);
+}
+
+test "@popCount tests" {
+    // returns the number of set bits in an integer
+    const a: u16 = 0b1010101111001101;
+    const b = @popCount(a);
+
+    try expectEqual(b, 10);
 }
