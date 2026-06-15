@@ -11,3 +11,4 @@ at the moment those are the builtin that this repo contains / have tests for
 - [x] @sizeOf
 - [x] @truncate
 - [x] @bitSizeOf
+- [x] @intCast

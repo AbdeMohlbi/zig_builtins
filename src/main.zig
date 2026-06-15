@@ -139,3 +139,10 @@ test "@bitSizeOf tests" {
     const type_4 = @bitSizeOf(i31);
     try expectEqual(type_4, 31);
 }
+
+test "@intCast tests" {
+    // converts an int to another int and could
+    const a: u16 = 0b0000000011111111;
+    const b: u8 = @intCast(a);
+    try expectEqual(b, 255);
+}
